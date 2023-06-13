@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Funding } from './interfaces/funding.interface';
-import { CreateFundingDto } from './dto/funding.dto';
+import {
+  CreateFundingDto,
+  FindById,
+  UpdateFundingDto,
+} from './dto/funding.dto';
 
 @Injectable()
 export class FundingService {
@@ -11,13 +15,13 @@ export class FundingService {
   ) {}
 
   async getFundings(): Promise<Funding[]> {
-    const founds = await this.fundingModel.find();
-    return founds;
+    const funds = await this.fundingModel.find();
+    return funds;
   }
 
-  async getFunding(fundId: string): Promise<Funding> {
-    const found = await this.fundingModel.findById(fundId);
-    return found;
+  async getFunding(fundId: FindById): Promise<Funding> {
+    const fund = await this.fundingModel.findById(fundId);
+    return fund;
   }
 
   async createFunding(createFundingDto: CreateFundingDto): Promise<Funding> {
@@ -25,20 +29,20 @@ export class FundingService {
     return await found.save();
   }
 
-  async deleteFunding(fundId: string): Promise<Funding> {
-    const found = await this.fundingModel.findByIdAndDelete(fundId);
-    return found;
+  async deleteFunding(fundId: FindById): Promise<Funding> {
+    const fund = await this.fundingModel.findByIdAndDelete(fundId);
+    return fund;
   }
 
   async updateFunding(
-    foundId: string,
-    createFundingDto: CreateFundingDto,
+    foundId: FindById,
+    updateFundingDto: UpdateFundingDto,
   ): Promise<Funding> {
-    const found = await this.fundingModel.findByIdAndUpdate(
+    const fund = await this.fundingModel.findByIdAndUpdate(
       foundId,
-      createFundingDto,
+      updateFundingDto,
       { new: true },
     );
-    return found;
+    return fund;
   }
 }

@@ -1,8 +1,9 @@
 import { Document } from 'mongoose';
 
 export interface Funding extends Document {
-  description: string;
-  curveset: object;
-  result: object;
+  curveSetName: string;
+  curveSetConfig: object;
+  bootstrapResults: object;
   createdAt: Date;
+  updatedAt: Date;
 }
