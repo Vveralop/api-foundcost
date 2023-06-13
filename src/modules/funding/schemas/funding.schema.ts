@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
-export const FoundingSchema = new Schema({
-  description:String,
+export const FundingSchema = new Schema({
+  description: String,
   curveset: Object,
   result: Object,
   createdAt: {

@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Founding extends Document {
+export interface Funding extends Document {
   description: string;
   curveset: object;
   result: object;

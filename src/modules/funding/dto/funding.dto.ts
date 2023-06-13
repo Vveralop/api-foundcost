@@ -1,4 +1,4 @@
-export class CreateFoundingDto {
+export class CreateFundingDto {
   description: string;
   curveset: object;
   result: object;
