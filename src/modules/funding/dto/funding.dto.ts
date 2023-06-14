@@ -1,15 +1,26 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class CreateFundingDto {
+  @ApiProperty()
   curveSetName: string;
+  @ApiProperty()
   curveSetConfig: object;
+  @ApiProperty()
   bootstrapResults: object;
+  @ApiProperty()
   createdAt: Date;
+  @ApiProperty()
   updatedAt: Date;
 }
 
 export class UpdateFundingDto {
+  @ApiProperty()
   curveSetName: string;
+  @ApiProperty()
   curveSetConfig: object;
+  @ApiProperty()
   bootstrapResults: object;
+  @ApiProperty()
   updatedAt: Date;
 }
 

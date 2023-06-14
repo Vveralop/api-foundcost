@@ -1,53 +1,68 @@
-export class CreateProductDto {
-  productName: string;
+import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
+
+@ApiExtraModels()
+class Options {
+  @ApiProperty()
+  identifier: string;
+  @ApiProperty()
   description: string;
+  @ApiProperty()
+  rateType: string;
+  @ApiProperty()
+  structure: string;
+  @ApiProperty()
+  dayCounter: string;
+  @ApiProperty()
+  compounding: string;
+  @ApiProperty()
+  allowPartialDisbursements: boolean;
+  @ApiProperty()
+  currency: string;
+  @ApiProperty()
+  minNotional: number;
+  @ApiProperty()
+  maxNotional: number;
+  @ApiProperty()
+  minStartTenor: string;
+  @ApiProperty()
+  maxStartTenor: string;
+  @ApiProperty()
+  maxEndTenor: string;
+  @ApiProperty()
+  discountCurve: string;
+  @ApiProperty()
+  forecastCurves: Array<string>;
+  @ApiProperty()
+  paymentFrequencies: Array<string>;
+}
+
+export class CreateProductDto {
+  @ApiProperty()
+  productName: string;
+  @ApiProperty()
+  description: string;
+  @ApiProperty()
   productType: string;
-  options: [
-    {
-      identifier: string;
-      description: string;
-      rateType: string;
-      structure: string;
-      dayCounter: string;
-      compounding: string;
-      allowPartialDisbursements: boolean;
-      currency: string;
-      minNotional: number;
-      maxNotional: number;
-      minStartTenor: string;
-      maxStartTenor: string;
-      maxEndTenor: string;
-      discountCurve: string;
-      forecastCurves: object;
-      paymentFrequencies: object;
-    },
-  ];
+  @ApiProperty({
+    type: Options,
+    isArray: true,
+  })
+  options: Options[];
 }
 
 export class UpdateProductDto {
+  @ApiProperty()
   productName: string;
+  @ApiProperty()
   description: string;
+  @ApiProperty()
   productType: string;
-  options: [
-    {
-      identifier: string;
-      description: string;
-      rateType: string;
-      structure: string;
-      dayCounter: string;
-      compounding: string;
-      allowPartialDisbursements: boolean;
-      currency: string;
-      minNotional: number;
-      maxNotional: number;
-      minStartTenor: string;
-      maxStartTenor: string;
-      maxEndTenor: string;
-      discountCurve: string;
-      forecastCurves: object;
-      paymentFrequencies: object;
-    },
-  ];
+  @ApiProperty({ isArray: true })
+  @ApiProperty({
+    type: Options,
+    isArray: true,
+  })
+  options: Options[];
 }
 
 export class ProductById {
