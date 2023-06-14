@@ -1,18 +1,23 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { MongoMemoryServer } from "mongodb-memory-server";
 import { FundingController } from './funding.controller';
+import { FundingService } from './funding.service';
+import { Connection, connect, Model } from "mongoose";
+import { getModelToken } from "@nestjs/mongoose";
 
-describe('FundingController', () => {
-  let controller: FundingController;
+import { Article, ArticleSchema } from "./article.schema";
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+describe('AppController', () => {
+  let fundingController: FundingController;
+  let mongod: MongoMemoryServer;
+  let mongoConnection: Connection;
+  let articleModel: Model<Article>;
+
+  beforeAll(async () => {
+    const app: TestingModule = await Test.createTestingModule({
       controllers: [FundingController],
+      providers: [FundingService],
     }).compile();
-
-    controller = module.get<FundingController>(FundingController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+    fundingController = app.get<FundingController>(FundingController);
   });
 });

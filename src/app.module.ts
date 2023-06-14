@@ -1,19 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { FundingModule } from './modules/funding/funding.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb://localhost/foundingcost'),
     FundingModule,
-    MongooseModule.forRoot('mongodb://localhost/funding'),
+    ProductModule,
     // MongooseModule.forRoot(
-    //   'mongodb://mongoadmin:admin@localhost:27017/Fundingcost',
-    //   // `mongodb://${process.env.USERMONGO}:${process.env.PASSMONGO}@${process.env.URIMONGO}/Fundingcost`,
+    //   'mongodb://mongoadmin:admin@localhost:27017/foundingcost',
+    //   // `mongodb://${process.env.USERMONGO}:${process.env.PASSMONGO}@${process.env.URIMONGO}/foundingcost`,
     // ),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

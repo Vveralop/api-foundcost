@@ -8,7 +8,7 @@ export const FundingSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  updatedAt: {
+  modifiedAt: {
     type: Date,
     default: Date.now,
   },
