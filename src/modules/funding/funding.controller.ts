@@ -35,7 +35,7 @@ export class FundingController {
   async getFundings(@Res() res) {
     const funds = await this.fundService.getFundings();
     return res.status(HttpStatus.OK).json({
-      code: HttpStatus.CREATED,
+      code: HttpStatus.OK,
       message: 'Record Found',
       data: funds,
     });
@@ -47,7 +47,7 @@ export class FundingController {
       const fund = await this.fundService.getFunding(fundId);
       if (fund)
         return res.status(HttpStatus.OK).json({
-          code: HttpStatus.CREATED,
+          code: HttpStatus.OK,
           message: 'Records Found',
           data: fund,
         });
@@ -72,7 +72,7 @@ export class FundingController {
       const fund = await this.fundService.deleteFunding(fundId);
       if (fund)
         return res.status(HttpStatus.OK).json({
-          code: HttpStatus.CREATED,
+          code: HttpStatus.OK,
           message: 'Record Deleted',
           data: fund,
         });
@@ -105,7 +105,7 @@ export class FundingController {
       );
       if (fund)
         return res.status(HttpStatus.OK).json({
-          code: HttpStatus.CREATED,
+          code: HttpStatus.OK,
           message: 'Record Updated',
           data: fund,
         });
