@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { FundingModule } from './modules/funding/funding.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductModule } from './modules/product/product.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://localhost/foundingcost'),
     FundingModule,
     ProductModule,
