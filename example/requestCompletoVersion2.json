@@ -1,0 +1,328 @@
+{
+    "curveSetName": "CF",
+    "refDate": "2023-05-25T04:00:00.000Z",
+    "curves": [
+        {
+            "_id": "648b486554e53243a2b4b4ec",
+            "productName": "Comercial",
+            "description": "Crédito orientado fines generales del deudor.",
+            "productType": "Loan",
+            "options": [
+                {
+                    "identifier": "Pagos iguales CLP",
+                    "description": "Crédito con pagos iguales",
+                    "rateType": "Fixed",
+                    "structure": "EqualPayments",
+                    "dayCounter": "Thirty360",
+                    "compounding": "Compounded",
+                    "allowPartialDisbursements": false,
+                    "currency": "CLP",
+                    "minNotional": 1,
+                    "maxNotional": 10000000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_CLP",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "Monthly",
+                        "Quarterly",
+                        "Semiannual",
+                        "Annual"
+                    ],
+                    "_id": "648b486554e53243a2b4b4ed"
+                },
+                {
+                    "identifier": "Pagos iguales UF",
+                    "description": "Crédito con pagos iguales",
+                    "rateType": "Fixed",
+                    "structure": "EqualPayments",
+                    "dayCounter": "Thirty360",
+                    "compounding": "Compounded",
+                    "allowPartialDisbursements": false,
+                    "currency": "CLF",
+                    "minNotional": 1,
+                    "maxNotional": 500000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_UF",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "Monthly",
+                        "Quarterly",
+                        "Semiannual",
+                        "Annual"
+                    ],
+                    "_id": "648b486554e53243a2b4b4ee"
+                },
+                {
+                    "identifier": "Pagos iguales USD",
+                    "description": "Crédito con pagos iguales",
+                    "rateType": "Fixed",
+                    "structure": "EqualPayments",
+                    "dayCounter": "Thirty360",
+                    "compounding": "Compounded",
+                    "allowPartialDisbursements": false,
+                    "currency": "USD",
+                    "minNotional": 1,
+                    "maxNotional": 10000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_USD_SINT",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "Monthly",
+                        "Quarterly",
+                        "Semiannual",
+                        "Annual"
+                    ],
+                    "_id": "648b486554e53243a2b4b4ef"
+                },
+                {
+                    "identifier": "Crédito CLP con perfil irregular",
+                    "description": "Pagos irregulares",
+                    "rateType": "Fixed",
+                    "structure": "CustomFixedRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": false,
+                    "currency": "CLP",
+                    "minNotional": 1,
+                    "maxNotional": 10000000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_CLP",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "OtherFrequency"
+                    ],
+                    "_id": "648b486554e53243a2b4b4f0"
+                },
+                {
+                    "identifier": "Crédito UF con perfil irregular",
+                    "description": "Pagos irregulares",
+                    "rateType": "Fixed",
+                    "structure": "CustomFixedRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": false,
+                    "currency": "CLF",
+                    "minNotional": 1,
+                    "maxNotional": 500000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_UF",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "OtherFrequency"
+                    ],
+                    "_id": "648b486554e53243a2b4b4f1"
+                },
+                {
+                    "identifier": "Crédito USD con perfil irregular",
+                    "description": "Pagos irregulares",
+                    "rateType": "Fixed",
+                    "structure": "CustomFixedRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": false,
+                    "currency": "USD",
+                    "minNotional": 1,
+                    "maxNotional": 10000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_USD_SINT",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "OtherFrequency"
+                    ],
+                    "_id": "648b486554e53243a2b4b4f2"
+                },
+                {
+                    "identifier": "Custom Flotante CLP",
+                    "description": "Pagos irregulares tasa flotante",
+                    "rateType": "Floating",
+                    "structure": "CustomFloatingRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": true,
+                    "currency": "CLP",
+                    "minNotional": 1,
+                    "maxNotional": 10000000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_CLP",
+                    "forecastCurves": [
+                        {
+                            "curveName": "ICP",
+                            "forecastCurve": "ICP",
+                            "fixingFrequency": "OtherFrequency"
+                        },
+                        {
+                            "curveName": "ICP1M",
+                            "forecastCurve": "ICP",
+                            "fixingFrequency": "Monthly"
+                        },
+                        {
+                            "curveName": "ICP3M",
+                            "forecastCurve": "ICP",
+                            "fixingFrequency": "Quarterly"
+                        },
+                        {
+                            "curveName": "ICP6M",
+                            "forecastCurve": "ICP",
+                            "fixingFrequency": "Semiannual"
+                        },
+                        {
+                            "curveName": "ICP12M",
+                            "forecastCurve": "ICP",
+                            "fixingFrequency": "Annual"
+                        },
+                        {
+                            "curveName": "TABCLP1M",
+                            "forecastCurve": "TABCLP1M",
+                            "fixingFrequency": "Monthly"
+                        },
+                        {
+                            "curveName": "TABCLP3M",
+                            "forecastCurve": "TABCLP3M",
+                            "fixingFrequency": "Quarterly"
+                        },
+                        {
+                            "curveName": "TABCLP6M",
+                            "forecastCurve": "TABCLP6M",
+                            "fixingFrequency": "Semiannual"
+                        },
+                        {
+                            "curveName": "TABCLP12M",
+                            "forecastCurve": "TABCLP12M",
+                            "fixingFrequency": "Annual"
+                        }
+                    ],
+                    "paymentFrequencies": [],
+                    "_id": "648b486554e53243a2b4b4f3"
+                },
+                {
+                    "identifier": "Custom Flotante UF",
+                    "description": "Pagos irregulares tasa flotante",
+                    "rateType": "Floating",
+                    "structure": "CustomFloatingRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": true,
+                    "currency": "CLF",
+                    "minNotional": 1,
+                    "maxNotional": 500000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_UF",
+                    "forecastCurves": [
+                        {
+                            "curveName": "TABUF1M",
+                            "forecastCurve": "TABUF1M",
+                            "fixingFrequency": "Monthly"
+                        },
+                        {
+                            "curveName": "TABUF3M",
+                            "forecastCurve": "TABUF3M",
+                            "fixingFrequency": "Quarterly"
+                        },
+                        {
+                            "curveName": "TABUF6M",
+                            "forecastCurve": "TABUF6M",
+                            "fixingFrequency": "Semiannual"
+                        },
+                        {
+                            "curveName": "TABUF12M",
+                            "forecastCurve": "TABUF12M",
+                            "fixingFrequency": "Annual"
+                        }
+                    ],
+                    "paymentFrequencies": [],
+                    "_id": "648b486554e53243a2b4b4f4"
+                },
+                {
+                    "identifier": "Custom Flotante USD",
+                    "description": "Pagos irregulares tasa flotante",
+                    "rateType": "Floating",
+                    "structure": "CustomFloatingRate",
+                    "dayCounter": "Actual360",
+                    "compounding": "Simple",
+                    "allowPartialDisbursements": true,
+                    "currency": "USD",
+                    "minNotional": 1,
+                    "maxNotional": 10000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "90D",
+                    "maxEndTenor": "20Y",
+                    "discountCurve": "CF_USD_OPT",
+                    "forecastCurves": [
+                        {
+                            "curveName": "SOFR",
+                            "forecastCurve": "SOFR",
+                            "fixingFrequency": "OtherFrequency"
+                        },
+                        {
+                            "curveName": "TERMSOFR1M",
+                            "forecastCurve": "SOFR",
+                            "fixingFrequency": "Monthly"
+                        },
+                        {
+                            "curveName": "TERMSOFR3M",
+                            "forecastCurve": "SOFR",
+                            "fixingFrequency": "Quarterly"
+                        },
+                        {
+                            "curveName": "TERMSOFR6M",
+                            "forecastCurve": "SOFR",
+                            "fixingFrequency": "Semiannual"
+                        },
+                        {
+                            "curveName": "TERMSOFR12M",
+                            "forecastCurve": "SOFR",
+                            "fixingFrequency": "Annual"
+                        }
+                    ],
+                    "paymentFrequencies": [],
+                    "_id": "648b486554e53243a2b4b4f5"
+                }
+            ],
+            "__v": 0
+        },
+        {
+            "_id": "648b4b8f54e53243a2b4b4f7",
+            "description": "Crédito orientado a compras de viviendas.",
+            "productType": "Loan",
+            "options": [
+                {
+                    "description": "Crédito hipotecario para persona fisica.",
+                    "rateType": "Fixed",
+                    "structure": "EqualPayments",
+                    "dayCounter": "Thirty360",
+                    "compounding": "Compounded",
+                    "allowPartialDisbursements": false,
+                    "currency": "CLF",
+                    "minNotional": 1,
+                    "maxNotional": 10000000000,
+                    "minStartTenor": "1D",
+                    "maxStartTenor": "30D",
+                    "maxEndTenor": "30Y",
+                    "discountCurve": "CF_UF_HIPOTECARIO",
+                    "forecastCurves": [],
+                    "paymentFrequencies": [
+                        "Monthly"
+                    ],
+                    "_id": "648b4b8f54e53243a2b4b4f8"
+                }
+            ],
+            "__v": 0
+        }
+    ]
+}

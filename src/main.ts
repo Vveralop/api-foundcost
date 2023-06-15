@@ -9,6 +9,7 @@ async function bootstrap() {
   const LISTEN_ADDRESS = DEV ? 'localhost' : '0.0.0.0';
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+  app.setGlobalPrefix(process.env.API_PREFIX);
 
   //Swagger Config
   const config = new DocumentBuilder()

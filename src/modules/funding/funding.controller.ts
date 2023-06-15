@@ -1,4 +1,10 @@
-import { ApiBody, ApiOperation, ApiResponse, ApiTags, ApiParam } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+  ApiParam,
+} from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -14,13 +20,14 @@ import {
   CreateFundingDto,
   FindById,
   UpdateFundingDto,
+  FindByCreatedAt,
 } from './dto/funding.dto';
 import { FundingService } from './funding.service';
 
 @Controller('Funding')
 @ApiTags('Funding')
 export class FundingController {
-  constructor(private fundService: FundingService) { }
+  constructor(private fundService: FundingService) {}
 
   @Post('')
   @ApiOperation({
@@ -40,6 +47,42 @@ export class FundingController {
         message: 'Record Created',
         data: { RecordId: fund._id },
       });
+    } catch (e) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        code: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: e.message,
+        data: '',
+      });
+    }
+  }
+
+  @ApiParam({ name: 'dateCreated', type: Date })
+  @Get('/bydate/:dateCreated')
+  @ApiOperation({
+    summary: 'Returns list of Cost of Funds parameters created by date',
+  })
+  @ApiResponse({ status: 200, description: 'when returns a record' })
+  @ApiResponse({ status: 404, description: 'when record not found' })
+  @ApiResponse({ status: 500, description: "500's when another error occurs." })
+  async getFundingsByCreatedAt(
+    @Res() res,
+    @Param('dateCreated')
+    dateCreated: FindByCreatedAt,
+  ) {
+    try {
+      const funds = await this.fundService.getFundingsByCreatedAt(dateCreated);
+      if (funds)
+        return res.status(HttpStatus.OK).json({
+          code: HttpStatus.OK,
+          message: 'Records Found',
+          data: funds,
+        });
+      else
+        return res.status(HttpStatus.NOT_FOUND).json({
+          code: HttpStatus.NOT_FOUND,
+          message: 'Record Not Found for Id Provided. Please Enter a Valid ID.',
+          data: '',
+        });
     } catch (e) {
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
         code: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -80,6 +123,7 @@ export class FundingController {
     }
   }
 
+  @ApiParam({ name: 'fundId', type: Number })
   @Get('/:fundId')
   @ApiOperation({
     summary: 'Returns some Cost of Found parameter with its ID',
@@ -111,6 +155,7 @@ export class FundingController {
     }
   }
 
+  @ApiParam({ name: 'fundId', type: Number })
   @Delete('/:fundId')
   @ApiOperation({
     summary: 'Delete some parameter with its ID',
@@ -142,6 +187,7 @@ export class FundingController {
     }
   }
 
+  @ApiParam({ name: 'fundId', type: Number })
   @Put('/:fundId')
   @ApiOperation({
     summary: 'Update some parameter with its ID',

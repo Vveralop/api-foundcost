@@ -7,12 +7,12 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost/foundingcost'),
+    MongooseModule.forRoot('mongodb://localhost/fundingofcost'),
     FundingModule,
     ProductModule,
     // MongooseModule.forRoot(
-    //   'mongodb://mongoadmin:admin@localhost:27017/foundingcost',
-    //   // `mongodb://${process.env.USERMONGO}:${process.env.PASSMONGO}@${process.env.URIMONGO}/foundingcost`,
+    //   'mongodb://mongoadmin:admin@localhost:27017/fundingofcost',
+    //   // `mongodb://${process.env.USERMONGO}:${process.env.PASSMONGO}@${process.env.URIMONGO}/fundingofcost`,
     // ),
   ],
   controllers: [],

@@ -27,3 +27,7 @@ export class UpdateFundingDto {
 export class FindById {
   fundId: string;
 }
+
+export class FindByCreatedAt {
+  createdAt: Date;
+}

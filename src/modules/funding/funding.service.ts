@@ -6,6 +6,7 @@ import {
   CreateFundingDto,
   FindById,
   UpdateFundingDto,
+  FindByCreatedAt,
 } from './dto/funding.dto';
 
 @Injectable()
@@ -13,6 +14,19 @@ export class FundingService {
   constructor(
     @InjectModel('Funding') private readonly fundingModel: Model<Funding>,
   ) {}
+
+  async getFundingsByCreatedAt(
+    dateCreated: FindByCreatedAt,
+  ): Promise<Funding[]> {
+    const query = {
+      date: {
+        $gte: dateCreated,
+        $lte: dateCreated,
+      },
+    };
+    const funds = await this.fundingModel.find(query);
+    return funds;
+  }
 
   async getFundings(): Promise<Funding[]> {
     const funds = await this.fundingModel.find();
@@ -35,11 +49,11 @@ export class FundingService {
   }
 
   async updateFunding(
-    foundId: FindById,
+    fundId: FindById,
     updateFundingDto: UpdateFundingDto,
   ): Promise<Funding> {
     const fund = await this.fundingModel.findByIdAndUpdate(
-      foundId,
+      fundId,
       updateFundingDto,
       { new: true },
     );

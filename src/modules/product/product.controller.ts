@@ -1,4 +1,4 @@
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -72,6 +72,7 @@ export class ProductController {
     }
   }
 
+  @ApiParam({ name: 'productId', type: Number })
   @Get('/:productId')
   @ApiOperation({
     summary: 'Returns Any Product with ID',
@@ -103,6 +104,7 @@ export class ProductController {
     }
   }
 
+  @ApiParam({ name: 'productId', type: Number })
   @Delete('/:productId')
   @ApiOperation({
     summary: 'Delete Product by ID',
@@ -134,6 +136,7 @@ export class ProductController {
     }
   }
 
+  @ApiParam({ name: 'productId', type: Number })
   @Put('/:productId')
   @ApiBody({
     type: CreateProductDto,
