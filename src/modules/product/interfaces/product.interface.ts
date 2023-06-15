@@ -4,6 +4,9 @@ export interface Product extends Document {
   productName: string;
   description: string;
   productType: string;
+  status: string;
+  userModify: string;
+  modifyDate: Date;
   options: [
     {
       identifier: string;

@@ -1,6 +1,5 @@
-export const fundStub = () => {
+export const FundDtoStub = () => {
   return {
-    _id: '9988aaaabbb',
     curveSetName: 'CF',
     curveSetConfig: {
       curva: '1',
@@ -12,7 +11,7 @@ export const fundStub = () => {
         { date: '2023-05-01', value: 0.31231 },
       ],
     },
-    createdAt: '2023-02-01',
-    updatedAt: '2023-02-01',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   };
 };

@@ -153,6 +153,7 @@ export class ProductController {
     @Param('productId') productId: ProductById,
   ) {
     try {
+      updateProductDto.modifyDate = new Date();
       const product = await this.productService.updateProduct(
         productId,
         updateProductDto,

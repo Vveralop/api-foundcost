@@ -4,6 +4,12 @@ export const ProductSchema = new Schema({
   productName: String,
   description: String,
   productType: String,
+  status: String,
+  userModify: String,
+  modifyDate: {
+    type: Date,
+    default: Date.now,
+  },
   options: [
     {
       identifier: String,

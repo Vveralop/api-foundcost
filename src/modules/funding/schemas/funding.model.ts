@@ -12,8 +12,6 @@ export class Funding extends Document {
   // eslint-disable-next-line @typescript-eslint/ban-types
   bootstrapResults: Object;
   @Prop()
-  body: string;
-  @Prop()
   createdAt: Date;
   @Prop()
   modifiedAt: Date;

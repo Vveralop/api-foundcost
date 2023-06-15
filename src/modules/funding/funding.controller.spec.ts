@@ -1,23 +1,64 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MongoMemoryServer } from "mongodb-memory-server";
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import { FundingController } from './funding.controller';
 import { FundingService } from './funding.service';
-import { Connection, connect, Model } from "mongoose";
-import { getModelToken } from "@nestjs/mongoose";
+import { Connection, connect, Model } from 'mongoose';
+import { FundingSchema } from './schemas/funding.schema';
+import { getModelToken } from '@nestjs/mongoose';
+import { FundDtoStub } from '../../../test/unit/fund/stub/fund.dto.stub';
+import { FundAlreadyExists } from '../../../test/unit/fund/stub/fund-already-exists.exception';
 
-import { Article, ArticleSchema } from "./article.schema";
-
-describe('AppController', () => {
+describe('FundingController', () => {
   let fundingController: FundingController;
   let mongod: MongoMemoryServer;
   let mongoConnection: Connection;
-  let articleModel: Model<Article>;
+  let fundingModel: Model<typeof FundingSchema>;
 
   beforeAll(async () => {
+    mongod = await MongoMemoryServer.create();
+    const uri = mongod.getUri();
+    mongoConnection = (await connect(uri)).connection;
+    const fundingModel = mongoConnection.model('Funding', FundingSchema);
+
     const app: TestingModule = await Test.createTestingModule({
       controllers: [FundingController],
-      providers: [FundingService],
+      providers: [
+        FundingService,
+        { provide: getModelToken('Funding'), useValue: fundingModel },
+      ],
     }).compile();
     fundingController = app.get<FundingController>(FundingController);
+  });
+
+  afterAll(async () => {
+    await mongoConnection.dropDatabase();
+    await mongoConnection.close();
+    await mongod.stop();
+  });
+
+  afterEach(async () => {
+    const collections = mongoConnection.collections;
+    for (const key in collections) {
+      const collection = collections[key];
+      await collection.deleteMany({});
+    }
+  });
+
+  describe('postFunding', () => {
+    it('should return the saved object', async () => {
+      const res = '';
+      const createdFund = await fundingController.createFunding(
+        res,
+        FundDtoStub(),
+      );
+      expect(createdFund.curveSetName).toBe(FundDtoStub().curveSetName);
+    });
+    it('should return ArticleAlreadyExists (Bad Request - 400) exception', async () => {
+      const res = '';
+      await new fundingModel(FundDtoStub()).save();
+      await expect(
+        fundingController.createFunding(res, FundDtoStub()),
+      ).rejects.toThrow(FundAlreadyExists);
+    });
   });
 });

@@ -47,6 +47,12 @@ export class CreateProductDto {
     type: Options,
     isArray: true,
   })
+  @ApiProperty()
+  status: string;
+  @ApiProperty()
+  userModify: string;
+  @ApiProperty()
+  modifyDate: Date;
   options: Options[];
 }
 
@@ -62,6 +68,10 @@ export class UpdateProductDto {
     type: Options,
     isArray: true,
   })
+  @ApiProperty()
+  userModify: string;
+  @ApiProperty()
+  modifyDate: Date;
   options: Options[];
 }
 
