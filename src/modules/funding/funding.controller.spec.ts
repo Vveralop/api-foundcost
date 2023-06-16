@@ -7,6 +7,7 @@ import { FundingSchema } from './schemas/funding.schema';
 import { getModelToken } from '@nestjs/mongoose';
 import { FundDtoStub } from '../../../test/unit/fund/stub/fund.dto.stub';
 import { FundAlreadyExists } from '../../../test/unit/fund/stub/fund-already-exists.exception';
+import { FindById } from './dto/funding.dto';
 
 describe('FundingController', () => {
   let fundingController: FundingController;
@@ -50,15 +51,6 @@ describe('FundingController', () => {
       expect(createdFund.code).toBe(201);
     });
 
-    // describe('findAll', () => {
-    //   it('should return an array of object', async () => {
-    //     const result = ['test'];
-    //     jest.spyOn(FundingService, 'findAll').mockImplementation(() => result);
-  
-    //     expect(await catsController.findAll()).toBe(result);
-    //   });
-    // });
-
     // Trabajar en exception
     // it('should return (Bad Request - 400) exception', async () => {
     //   const createdFund = await fundingController.createFunding('');
@@ -66,5 +58,20 @@ describe('FundingController', () => {
     //     fundingController.createFunding(FundDtoStub()),
     //   ).rejects.toThrow(FundAlreadyExists);
     // });
+  });
+
+  describe('getFundings', () => {
+    it('should return all records', async () => {
+      const createdFund = await fundingController.getFundings();
+      expect(createdFund.code).toBe(200);
+    });
+  });
+
+  describe('getFunding', () => {
+    it('should return one records', async () => {
+      let _id: FindById;
+      const createdFund = await fundingController.getFunding(_id);
+      expect(createdFund.code).toBe(200);
+    });
   });
 });

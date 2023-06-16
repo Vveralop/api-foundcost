@@ -126,27 +126,23 @@ export class FundingController {
   @ApiResponse({ status: 200, description: 'when returns a record' })
   @ApiResponse({ status: 404, description: 'when record not found' })
   @ApiResponse({ status: 500, description: "500's when another error occurs." })
-  async getFunding(@Res() res, @Param('fundId') fundId: FindById) {
+  async getFunding(@Param('fundId') fundId: FindById) {
     try {
       const fund = await this.fundService.getFunding(fundId);
       if (fund)
-        return res.status(HttpStatus.OK).json({
-          code: HttpStatus.OK,
-          message: 'Records Found',
-          data: fund,
-        });
+        return { code: HttpStatus.OK, message: 'Records Found', data: fund };
       else
-        return res.status(HttpStatus.NOT_FOUND).json({
+        return {
           code: HttpStatus.NOT_FOUND,
           message: 'Record Not Found for Id Provided. Please Enter a Valid ID.',
-          data: '',
-        });
+          data: {},
+        };
     } catch (e) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
-        data: '',
-      });
+        data: {},
+      };
     }
   }
 
@@ -174,11 +170,11 @@ export class FundingController {
           data: '',
         });
     } catch (e) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
-        data: '',
-      });
+        data: {},
+      };
     }
   }
 
@@ -217,11 +213,11 @@ export class FundingController {
           data: '',
         });
     } catch (e) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
-        data: '',
-      });
+        data: {},
+      };
     }
   }
 }
