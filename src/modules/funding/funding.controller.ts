@@ -46,22 +46,12 @@ export class FundingController {
         message: 'Record Created',
         data: { RecordId: fund._id },
       };
-      // return res.status(HttpStatus.CREATED).json({
-      //   code: HttpStatus.CREATED,
-      //   message: 'Record Created',
-      //   data: { RecordId: fund._id },
-      // });
     } catch (e) {
       return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
         data: {},
       };
-      // return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      //   code: HttpStatus.INTERNAL_SERVER_ERROR,
-      //   message: e.message,
-      //   data: '',
-      // });
     }
   }
 

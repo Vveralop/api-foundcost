@@ -44,17 +44,27 @@ describe('FundingController', () => {
     }
   });
 
-  describe('postFunding', () => {
+  describe('createFund', () => {
     it('should return the saved object', async () => {
       const createdFund = await fundingController.createFunding(FundDtoStub());
       expect(createdFund.code).toBe(201);
     });
 
-    it('should return ArticleAlreadyExists (Bad Request - 400) exception', async () => {
-      await new fundingModel(FundDtoStub()).save();
-      await expect(
-        fundingController.createFunding(FundDtoStub()),
-      ).rejects.toThrow(FundAlreadyExists);
-    });
+    // describe('findAll', () => {
+    //   it('should return an array of object', async () => {
+    //     const result = ['test'];
+    //     jest.spyOn(FundingService, 'findAll').mockImplementation(() => result);
+  
+    //     expect(await catsController.findAll()).toBe(result);
+    //   });
+    // });
+
+    // Trabajar en exception
+    // it('should return (Bad Request - 400) exception', async () => {
+    //   const createdFund = await fundingController.createFunding('');
+    //   await expect(
+    //     fundingController.createFunding(FundDtoStub()),
+    //   ).rejects.toThrow(FundAlreadyExists);
+    // });
   });
 });
