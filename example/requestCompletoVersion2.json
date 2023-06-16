@@ -1,12 +1,15 @@
 {
-    "curveSetName": "CF",
-    "refDate": "2023-05-25T04:00:00.000Z",
-    "curves": [
+    "code": 200,
+    "message": "Record Updated",
+    "data": [
         {
             "_id": "648b486554e53243a2b4b4ec",
             "productName": "Comercial",
             "description": "Crédito orientado fines generales del deudor.",
             "productType": "Loan",
+            "status": "Activa",
+            "userModify": "EVVL4956",
+            "modifyDate": "2023-05-25T04:00:00.000Z",
             "options": [
                 {
                     "identifier": "Pagos iguales CLP",
@@ -300,6 +303,9 @@
             "_id": "648b4b8f54e53243a2b4b4f7",
             "description": "Crédito orientado a compras de viviendas.",
             "productType": "Loan",
+            "status": "Activa",
+            "userModify": "EVVL4956",
+            "modifyDate": "2023-05-25T04:00:00.000Z",
             "options": [
                 {
                     "description": "Crédito hipotecario para persona fisica.",
