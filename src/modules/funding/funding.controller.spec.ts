@@ -46,18 +46,14 @@ describe('FundingController', () => {
 
   describe('postFunding', () => {
     it('should return the saved object', async () => {
-      const res = '';
-      const createdFund = await fundingController.createFunding(
-        res,
-        FundDtoStub(),
-      );
-      expect(createdFund.curveSetName).toBe(FundDtoStub().curveSetName);
+      const createdFund = await fundingController.createFunding(FundDtoStub());
+      expect(createdFund.code).toBe(201);
     });
+
     it('should return ArticleAlreadyExists (Bad Request - 400) exception', async () => {
-      const res = '';
       await new fundingModel(FundDtoStub()).save();
       await expect(
-        fundingController.createFunding(res, FundDtoStub()),
+        fundingController.createFunding(FundDtoStub()),
       ).rejects.toThrow(FundAlreadyExists);
     });
   });

@@ -38,21 +38,30 @@ export class FundingController {
   })
   @ApiResponse({ status: 201, description: 'When the record is created' })
   @ApiResponse({ status: 500, description: "500's when another error occurs." })
-  async createFunding(@Res() res, @Body() createFundingDto: CreateFundingDto) {
+  async createFunding(@Body() createFundingDto: CreateFundingDto) {
     try {
       const fund = await this.fundService.createFunding(createFundingDto);
-
-      return res.status(HttpStatus.CREATED).json({
+      return {
         code: HttpStatus.CREATED,
         message: 'Record Created',
         data: { RecordId: fund._id },
-      });
+      };
+      // return res.status(HttpStatus.CREATED).json({
+      //   code: HttpStatus.CREATED,
+      //   message: 'Record Created',
+      //   data: { RecordId: fund._id },
+      // });
     } catch (e) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
-        data: '',
-      });
+        data: {},
+      };
+      // return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      //   code: HttpStatus.INTERNAL_SERVER_ERROR,
+      //   message: e.message,
+      //   data: '',
+      // });
     }
   }
 
@@ -99,27 +108,23 @@ export class FundingController {
   @ApiResponse({ status: 200, description: 'when returns a record' })
   @ApiResponse({ status: 404, description: 'when record not found' })
   @ApiResponse({ status: 500, description: "500's when another error occurs." })
-  async getFundings(@Res() res) {
+  async getFundings() {
     try {
       const funds = await this.fundService.getFundings();
       if (funds)
-        return res.status(HttpStatus.OK).json({
-          code: HttpStatus.OK,
-          message: 'Records Found',
-          data: funds,
-        });
+        return { code: HttpStatus.OK, message: 'Records Found', data: funds };
       else
-        return res.status(HttpStatus.NOT_FOUND).json({
+        return {
           code: HttpStatus.NOT_FOUND,
           message: 'Record Not Found for Id Provided. Please Enter a Valid ID.',
-          data: '',
-        });
+          data: {},
+        };
     } catch (e) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      return {
         code: HttpStatus.INTERNAL_SERVER_ERROR,
         message: e.message,
-        data: '',
-      });
+        data: {},
+      };
     }
   }
 
