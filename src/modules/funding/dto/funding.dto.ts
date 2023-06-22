@@ -31,3 +31,9 @@ export class FindById {
 export class FindByCreatedAt {
   createdAt: Date;
 }
+
+export class FundResponseCurve {
+  refDate: Date;
+  curveSetName: string;
+  curveName: string;
+}

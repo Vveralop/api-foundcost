@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { Funding } from './interfaces/funding.interface';
+import { Funding, responseCurve } from './interfaces/funding.interface';
 import {
   CreateFundingDto,
   FindById,
   UpdateFundingDto,
   FindByCreatedAt,
+  FundResponseCurve,
 } from './dto/funding.dto';
+import { clearConfigCache } from 'prettier';
 
 @Injectable()
 export class FundingService {
@@ -16,16 +18,42 @@ export class FundingService {
   ) {}
 
   async getFundingsByCreatedAt(
-    dateCreated: FindByCreatedAt,
+    dateCreated: Date,
   ): Promise<Funding[]> {
-    const query = {
-      date: {
-        $gte: dateCreated,
-        $lte: dateCreated,
-      },
-    };
-    const funds = await this.fundingModel.find(query);
+    const funds = await this.fundingModel.find({
+      "$expr": {
+        "$and": [
+          { $eq: [{ $year: "$createdAt" }, { $year: dateCreated }]},
+          { $eq: [{ $month: "$createdAt" }, { $month: dateCreated }]},
+          { $eq: [{ $dayOfMonth: "$createdAt" }, { $dayOfMonth: dateCreated }]}
+        ]
+      }
+    });
     return funds;
+  }
+
+  async getFundingsToDiscount(
+    paramsJson: FundResponseCurve
+  ): Promise<responseCurve[]> {
+    const initialDate: Date = new Date(paramsJson.refDate);
+    console.log(paramsJson)
+    const funds = await this.fundingModel.find({
+      "$expr": {
+        "$and": [
+          { $eq: [{ $year: "$createdAt" }, { $year: initialDate }]},
+          { $eq: [{ $month: "$createdAt" }, { $month: initialDate}]},
+          { $eq: [{ $dayOfMonth: "$createdAt" }, { $dayOfMonth: initialDate }]},
+          { $eq: ["$curveSetName", paramsJson.curveSetName]},
+          //{ $eq: ["$bootstrapResults.curveName", paramsJson.curveName]}
+        ]
+      }
+    });
+    if (funds.length > 0) {
+      const valor:responseCurve[] = funds[0].bootstrapResults;
+      return valor.filter(item => item.curveName === paramsJson.curveName);
+    } else {
+      return []
+    }
   }
 
   async getFundings(): Promise<Funding[]> {
