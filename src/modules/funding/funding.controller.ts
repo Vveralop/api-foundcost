@@ -98,10 +98,10 @@ export class FundingController {
   @ApiResponse({ status: 200, description: 'when returns a record' })
   @ApiResponse({ status: 404, description: 'when record not found' })
   @ApiResponse({ status: 500, description: "500's when another error occurs." })
-  async getFundingsToDiscount(@Param('findData') findData: string) {
+  async getResponseCurve(@Param('findData') findData: string) {
     try {
       const paramsQuery: FundResponseCurve = JSON.parse(findData);
-      const funds = await this.fundService.getFundingsToDiscount(paramsQuery);
+      const funds = await this.fundService.getResponseCurve(paramsQuery);
       if (funds.length > 0)
         return { code: HttpStatus.OK, message: 'Records Found', data: funds };
       else

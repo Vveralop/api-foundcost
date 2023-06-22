@@ -6,10 +6,8 @@ import {
   CreateFundingDto,
   FindById,
   UpdateFundingDto,
-  FindByCreatedAt,
   FundResponseCurve,
 } from './dto/funding.dto';
-import { clearConfigCache } from 'prettier';
 
 @Injectable()
 export class FundingService {
@@ -32,11 +30,10 @@ export class FundingService {
     return funds;
   }
 
-  async getFundingsToDiscount(
+  async getResponseCurve(
     paramsJson: FundResponseCurve
   ): Promise<responseCurve[]> {
     const initialDate: Date = new Date(paramsJson.refDate);
-    console.log(paramsJson)
     const funds = await this.fundingModel.find({
       "$expr": {
         "$and": [
