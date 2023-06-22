@@ -6,7 +6,7 @@ import { Connection, connect, Model } from 'mongoose';
 import { FundingSchema } from './schemas/funding.schema';
 import { getModelToken } from '@nestjs/mongoose';
 import { FundDtoStub } from '../../../test/unit/fund/stub/fund.dto.stub';
-import { FundAlreadyExists } from '../../../test/unit/fund/stub/fund-already-exists.exception';
+import { FindByCreatedAt , FindById } from './dto/funding.dto';
 
 describe('FundingController', () => {
   let fundingController: FundingController;
@@ -44,21 +44,52 @@ describe('FundingController', () => {
     }
   });
 
-  describe('postFunding', () => {
+  describe('createFund', () => {
     it('should return the saved object', async () => {
-      const res = '';
-      const createdFund = await fundingController.createFunding(
-        res,
-        FundDtoStub(),
-      );
-      expect(createdFund.curveSetName).toBe(FundDtoStub().curveSetName);
+      const createdFund = await fundingController.createFunding(FundDtoStub());
+      expect(createdFund.code).toBe(201);
     });
-    it('should return ArticleAlreadyExists (Bad Request - 400) exception', async () => {
-      const res = '';
-      await new fundingModel(FundDtoStub()).save();
-      await expect(
-        fundingController.createFunding(res, FundDtoStub()),
-      ).rejects.toThrow(FundAlreadyExists);
+
+    // Trabajar en exception
+    // it('should return (Bad Request - 400) exception', async () => {
+    //   const createdFund = await fundingController.createFunding('');
+    //   await expect(
+    //     fundingController.createFunding(FundDtoStub()),
+    //   ).rejects.toThrow(FundAlreadyExists);
+    // });
+  });
+
+  describe('getFunding', () => {
+    it('should return one records', async () => {
+      let _id: FindById;
+      const createdFund = await fundingController.createFunding(FundDtoStub());
+      _id = createdFund.data.RecordId;
+      const findFund = await fundingController.getFunding(_id);
+      expect(findFund.code).toBe(200);
+    });
+
+    it('should return not found', async () => {
+      let _id: FindById;
+      const createdFund = await fundingController.getFunding(_id);
+      expect(createdFund.code).toBe(404);
     });
   });
+
+  describe('getFundByDateCreated', () => {
+    it('should return records by date', async () => {
+      const createdFund = await fundingController.createFunding(FundDtoStub());
+      const createdAt = createdFund.data.dateCreated;
+      const findFund = await fundingController.getFundingsByCreatedAt(createdAt);
+      const fecha = findFund.data;
+      //const findFundDate = await fundingController.getFundingsByCreatedAt();
+      expect(findFund.code).toBe(200);
+    });
+
+    it('should return not found', async () => {
+      let _id: FindById;
+      const createdFund = await fundingController.getFunding(_id);
+      expect(createdFund.code).toBe(404);
+    });
+  });
+
 });

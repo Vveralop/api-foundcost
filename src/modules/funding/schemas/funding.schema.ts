@@ -6,10 +6,10 @@ export const FundingSchema = new Schema({
   bootstrapResults: Object,
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   modifiedAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
 });
